@@ -1,0 +1,14 @@
+{
+  "name": "label-setter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@octokit/rest": "^17.6.0",
+    "dotenv": "^8.2.0",
+    "prompts": "^2.3.2"
+  }
+}
