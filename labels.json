@@ -1,11 +1,11 @@
 [
   { "name": "Priority: Low", "color": "#009800", "description": "Low Priority" },
   { "name": "Priority: Medium", "color": "#fbca04", "description": "Medium Priority" },
-  { "name": "Priority: High", "color": "#07E8D3", "description": "High Priority" },
+  { "name": "Priority: High", "color": "#e91e63", "description": "High Priority" },
   { "name": "Priority: Critical", "color": "#e11d21", "description": "Critical Priority" },
   { "name": "Priority: Urgent", "color": "#a31545", "description": "Urgent Priority" },
   { "name": "Effort: Easy", "color": "#28a745", "description": "Implementation / Execution Effort is easy." },
-  { "name": "Effort: Hard", "color": "#b26500", "description": "Implementation / Execution Effort is hard." },
+  { "name": "Effort: Hard", "color": "#ab59f2", "description": "Implementation / Execution Effort is hard." },
   { "name": "Effort: Medium", "color": "#b2102f", "description": "Implementation / Execution Effort is medium." },
   { "name": "Status: Abandoned", "color": "#000000", "description": "This issue or pull request is abandoned." },
   { "name": "Status: Accepted", "color": "#b2ff59", "description": "This issue or pull request is accepted." },
@@ -31,7 +31,7 @@
   { "name": "Type: Duplicate", "color": "#dd7c58", "description": "This issue or pull request already exists" },
   { "name": "Type: Design", "color": "#0d47a1", "description": "Design related work." },
   { "name": "Type: Research", "color": "#4615b2", "description": "Research related work" },
-  { "name": "Type: Documentation", "color": "#607d8b", "description": "Documentation related work." },
+  { "name": "Type: Documentation", "color": "#79f2c9", "description": "Documentation related work." },
   { "name": "Concept: Frontend", "color": "#e61e59", "description": "Frontend related work." },
   { "name": "Concept: Backend", "color": "#f4646c", "description": "Backend related work." },
   { "name": "Concept: Database", "color": "#0c5575", "description": "Database related work." },
@@ -41,5 +41,6 @@
   { "name": "Concept: E2E Testing", "color": "#142bff", "description": "E2E Testing related work." },
   { "name": "Concept: Stress Testing", "color": "#03a9f4", "description": "Stress Testing related work." },
   { "name": "Concept: Wiki", "color": "#c53dac", "description": "Wiki related work." },
-  { "name": "Concept: Social", "color": "#23a362", "description": "Social Media related Work." }
+  { "name": "Concept: Social", "color": "#fc163d", "description": "Social Media related work." },
+  { "name": "Concept: Localization", "color": "#67eadd", "description": "Localization related work." }
 ]
