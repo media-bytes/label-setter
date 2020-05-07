@@ -3,7 +3,7 @@ const prompts = require('prompts');
 
 require('dotenv').config();
 
-const labels = require('./labels.json');
+const labels = require('./packages/default.json');
 
 let authToken = process.env.LABEL_AUTH_TOKEN || '';
 let owner = process.env.LABEL_AUTH_ORG || '';
