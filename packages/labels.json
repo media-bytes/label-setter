@@ -32,6 +32,7 @@
   { "name": "Type: Design", "color": "#0d47a1", "description": "Design related work." },
   { "name": "Type: Research", "color": "#4615b2", "description": "Research related work" },
   { "name": "Type: Documentation", "color": "#79f2c9", "description": "Documentation related work." },
+  { "name": "Type: Base Branch", "color": "#9c18e1", "description": "Base branch branched-off of default branch." },
   { "name": "Concept: Frontend", "color": "#e61e59", "description": "Frontend related work." },
   { "name": "Concept: Backend", "color": "#f4646c", "description": "Backend related work." },
   { "name": "Concept: Database", "color": "#0c5575", "description": "Database related work." },

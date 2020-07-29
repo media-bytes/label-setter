@@ -32,6 +32,7 @@
   { "name": "t/design", "color": "#0d47a1", "description": "Design related work." },
   { "name": "t/research", "color": "#4615b2", "description": "Research related work." },
   { "name": "t/documentation", "color": "#79f2c9", "description": "Documentation related work." },
+  { "name": "t/base branch", "color": "#9c18e1", "description": "Base branch branched-off of default branch." },
   { "name": "c/frontend", "color": "#e61e59", "description": "Frontend related work." },
   { "name": "c/backend", "color": "#f4646c", "description": "Backend related work." },
   { "name": "c/database", "color": "#0c5575", "description": "Database related work." },
