@@ -39,7 +39,7 @@
   { "name": "c/devops", "color": "#3b60de", "description": "Devops related work. (Deployment, Web Services, Package Managers, etc.)" },
   { "name": "c/unit testing", "color": "#f8b109", "description": "Unit Testing related work." },
   { "name": "c/e2e testing", "color": "#142bff", "description": "E2E Testing related work." },
-  { "name": "c/stress Testing", "color": "#03a9f4", "description": "Stress Testing related work." },
+  { "name": "c/stress testing", "color": "#03a9f4", "description": "Stress Testing related work." },
   { "name": "c/wiki", "color": "#c53dac", "description": "Wiki related work." },
   { "name": "c/social", "color": "#fc163d", "description": "Social Media related work." },
   { "name": "c/localization", "color": "#67eadd", "description": "Localization related work." }
