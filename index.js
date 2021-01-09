@@ -1,24 +1,24 @@
 const { Octokit } = require("@octokit/rest");
-const prompts = require('prompts');
+const prompts = require("prompts");
 
-require('dotenv').config();
+require("dotenv").config();
 
-const labels = require('./packages/default.json');
+const labels = require("./packages/labels-shorten.json");
 
-let authToken = process.env.LABEL_AUTH_TOKEN || '';
-let owner = process.env.LABEL_AUTH_ORG || '';
+let authToken = process.env.LABEL_AUTH_TOKEN || "";
+let owner = process.env.LABEL_AUTH_ORG || "";
 let octokit = null;
 
 const getRepoChoices = async () => {
   const response = await octokit.repos.listForOrg({
-    org: owner
+    org: owner,
   });
 
-  return response.data.map(repo => {
+  return response.data.map((repo) => {
     return {
       title: repo.name,
-      value: repo.name
-    }
+      value: repo.name,
+    };
   });
 };
 
@@ -26,13 +26,13 @@ const selectRepoFromList = async () => {
   const repoChoices = await getRepoChoices();
 
   const response = await prompts({
-    type: 'select',
-    name: 'repo',
-    message: 'Please select a repo:',
-    choices: repoChoices
+    type: "select",
+    name: "repo",
+    message: "Please select a repo:",
+    choices: repoChoices,
   });
 
-  if (!('repo' in response)) {
+  if (!("repo" in response)) {
     process.exit(0);
   }
 
@@ -45,10 +45,9 @@ const repoExists = async (repo) => {
       owner,
       repo,
     });
-    
   } catch (err) {
     if (err.status === 404) {
-      return false
+      return false;
     }
 
     throw err;
@@ -58,26 +57,29 @@ const repoExists = async (repo) => {
 };
 
 const getRepoName = async () => {
-  let repoName = '';
+  let repoName = "";
 
-  while (repoName == '') {
+  while (repoName == "") {
     const response = await prompts({
-      type: 'text',
-      name: 'repo',
-      message: 'Which repo would you like to add labels to? (Hit Enter to select from a list)'
+      type: "text",
+      name: "repo",
+      message:
+        "Which repo would you like to add labels to? (Hit Enter to select from a list)",
     });
 
-    if (!('repo' in response)) {
+    if (!("repo" in response)) {
       process.exit(0);
     }
 
-    if (response.repo === '') {
-      repoName = selectRepoFromList()
+    if (response.repo === "") {
+      repoName = selectRepoFromList();
     } else {
       if (await repoExists(response.repo)) {
         repoName = response.repo;
       } else {
-        console.log(`\r\nThe repo name '${response.repo}' does not exist. Please enter another.\r\n`)
+        console.log(
+          `\r\nThe repo name '${response.repo}' does not exist. Please enter another.\r\n`
+        );
       }
     }
   }
@@ -88,7 +90,7 @@ const getRepoName = async () => {
 const checkForExistingLabels = async (repo) => {
   const labels = await getLabels(repo);
 
-  if (labels.length > 0 && await shouldDeleteAllLabels(labels.length)) {
+  if (labels.length > 0 && (await shouldDeleteAllLabels(labels.length))) {
     await deleteAllLabels(repo, labels);
   }
 };
@@ -96,7 +98,7 @@ const checkForExistingLabels = async (repo) => {
 const getLabels = async (repo) => {
   const response = await octokit.issues.listLabelsForRepo({
     owner: owner,
-    repo: repo
+    repo: repo,
   });
 
   return response.data;
@@ -104,13 +106,13 @@ const getLabels = async (repo) => {
 
 const shouldDeleteAllLabels = async (numLabels) => {
   const response = await prompts({
-    type: 'confirm',
-    name: 'shouldDelete',
+    type: "confirm",
+    name: "shouldDelete",
     message: `\r\nThis repo already has ${numLabels} labels. Should we delete these existing labels?`,
-    initial: false
+    initial: false,
   });
 
-  if (!('shouldDelete' in response)) {
+  if (!("shouldDelete" in response)) {
     process.exit(0);
   }
 
@@ -122,7 +124,7 @@ const deleteAllLabels = async (repo, labels) => {
     await octokit.issues.deleteLabel({
       owner: owner,
       repo: repo,
-      name: labels[i].name
+      name: labels[i].name,
     });
   }
 };
@@ -133,19 +135,19 @@ const createLabel = async (repo, label) => {
     repo: repo,
     name: label.name,
     color: String(label.color).substring(1),
-    description: label.description
+    description: label.description,
   });
 };
 
 const shouldOverwrite = async (labelName) => {
   const response = await prompts({
-    type: 'confirm',
-    name: 'shouldOverwrite',
+    type: "confirm",
+    name: "shouldOverwrite",
     message: `\r\nThe label '${labelName}' already exists. Should we overwrite it?`,
-    initial: false
+    initial: false,
   });
 
-  if (!('shouldOverwrite' in response)) {
+  if (!("shouldOverwrite" in response)) {
     process.exit(0);
   }
 
@@ -158,32 +160,33 @@ const updateLabel = async (repo, label) => {
     repo: repo,
     name: label.name,
     color: label.color,
-    description: label.description
+    description: label.description,
   });
 };
 
 const promptForAuthToken = async () => {
-    const response = await prompts({
-      type: 'text',
-      name: 'authToken',
-      message: 'What is your personal auth token?'
-    });
+  const response = await prompts({
+    type: "text",
+    name: "authToken",
+    message: "What is your personal auth token?",
+  });
 
-    if (!('authToken' in response) || response.authToken == '') {
-      process.exit(0);
-    }
+  if (!("authToken" in response) || response.authToken == "") {
+    process.exit(0);
+  }
 
-    return response.authToken;
+  return response.authToken;
 };
 
 const promptForOwner = async () => {
   const response = await prompts({
-    type: 'text',
-    name: 'owner',
-    message: 'What organization would you like to use? (Hit enter to select from a list)'
+    type: "text",
+    name: "owner",
+    message:
+      "What organization would you like to use? (Hit enter to select from a list)",
   });
 
-  if (!('owner' in response)) {
+  if (!("owner" in response)) {
     process.exit(0);
   }
 
@@ -191,11 +194,11 @@ const promptForOwner = async () => {
 };
 
 const getSetupVariables = async () => {
-  if (authToken == '') {
+  if (authToken == "") {
     authToken = await promptForAuthToken();
   }
-  
-  if (owner == '') {
+
+  if (owner == "") {
     owner = await promptForOwner();
   }
 };
@@ -203,19 +206,19 @@ const getSetupVariables = async () => {
 const setupOctokit = async () => {
   octokit = new Octokit({
     auth: authToken,
-    userAgent: 'Label Setter v0.0.1',
-    baseUrl: 'https://api.github.com'
+    userAgent: "Label Setter v0.0.1",
+    baseUrl: "https://api.github.com",
   });
 };
 
 const getOrganizations = async () => {
   const response = await octokit.orgs.listForAuthenticatedUser();
 
-  return response.data.map(org => {
+  return response.data.map((org) => {
     return {
       title: org.login,
-      value: org.login
-    }
+      value: org.login,
+    };
   });
 };
 
@@ -223,13 +226,13 @@ const selectOwnerFromList = async () => {
   const ownerChoices = await getOrganizations();
 
   const response = await prompts({
-    type: 'select',
-    name: 'owner',
-    message: 'Please select an organization to select a repo from:',
-    choices: ownerChoices
+    type: "select",
+    name: "owner",
+    message: "Please select an organization to select a repo from:",
+    choices: ownerChoices,
   });
 
-  if (!('owner' in response)) {
+  if (!("owner" in response)) {
     process.exit(0);
   }
 
@@ -241,7 +244,7 @@ const createLabels = async () => {
 
   await setupOctokit();
 
-  if (owner === '') {
+  if (owner === "") {
     owner = await selectOwnerFromList();
   }
 
@@ -250,11 +253,11 @@ const createLabels = async () => {
   await checkForExistingLabels(repo);
 
   for (let i = 0; i < labels.length; i++) {
-    console.log(`Creating label: ${labels[i].name}`)
+    console.log(`Creating label: ${labels[i].name}`);
     try {
       await createLabel(repo, labels[i]);
     } catch (err) {
-      if (err.status === 422 && err.errors[0].code === 'already_exists') {
+      if (err.status === 422 && err.errors[0].code === "already_exists") {
         if (await shouldOverwrite(labels[i].name)) {
           await updateLabel(repo, labels[i]);
         }
@@ -263,9 +266,9 @@ const createLabels = async () => {
 
       throw err;
     }
-  };
+  }
 
-  console.log('Finished')
+  console.log("Finished");
 };
 
 createLabels();
